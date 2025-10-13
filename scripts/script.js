@@ -8,7 +8,7 @@ const loadingOverlay = document.getElementById('loading-overlay');
 
 // Configuration API
 const apiKey = 'AIzaSyBTjg1_GwDj1UpSUN_H41QHe354nig4eGk'; 
-const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-pro:generateContent?key=' + apiKey;
+const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey;
 
 let conversationHistory = [];
 let isTyping = false;

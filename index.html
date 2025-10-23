@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>--</title>
+    <title>AI Chat Assistant</title>
+    <meta name="description" content="Modern AI-powered chat assistant with beautiful UI">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/all.min.css">
     <link rel="stylesheet" href="styles/default.min.css">
@@ -19,23 +20,26 @@
             <div class="header-content">
                 <div class="ai-avatar">
                     <div class="avatar-glow"></div>
-                    <i class="fas fa-robot"></i>
+                    <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="currentColor"/>
+                        <circle cx="12" cy="8" r="2" fill="currentColor" opacity="0.3"/>
+                    </svg>
                 </div>
                 <div class="header-info">
-                    <!--<h1>AI Assistant</h1>-->
+                    <h1 class="header-title">AI Assistant</h1>
                     <p class="status">
                         <span class="status-dot"></span>
                         En ligne
                     </p>
                 </div>
-                <!--<div class="header-actions">
+                <div class="header-actions">
                     <button class="action-btn" id="clear-chat" title="Effacer la conversation">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="action-btn" id="settings-btn" title="Paramètres">
-                        <i class="fas fa-cog"></i>
+                    <button class="action-btn" id="theme-toggle" title="Changer le thème">
+                        <i class="fas fa-moon"></i>
                     </button>
-                </div>-->
+                </div>
             </div>
         </header>
 
@@ -44,25 +48,61 @@
             <div id="chat-box" class="chat-messages">
                 <!-- Welcome Message -->
                 <div class="welcome-message">
-                    <div class="welcome-avatar">
-                        <i class="fas fa-robot"></i>
+                    <div class="welcome-header">
+                        <div class="welcome-avatar">
+                            <div class="avatar-pulse"></div>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h2 class="welcome-title">Bonjour ! 👋</h2>
                     </div>
                     <div class="welcome-content">
-                        <h2>Bonjour ! 👋</h2>
-                        <p>Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui ?</p>
+                        <p class="welcome-description">Je suis votre assistant IA intelligent. Posez-moi n'importe quelle question ou choisissez un sujet ci-dessous pour commencer.</p>
                         <div class="quick-actions">
-                            <button class="quick-btn" data-message="Explique-moi comment fonctionne l'intelligence artificielle">
-                                <i class="fas fa-brain"></i>
-                                IA & Technologie
+                            <button class="quick-btn gradient-border" data-message="Explique-moi comment fonctionne l'intelligence artificielle">
+                                <div class="quick-btn-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="quick-btn-content">
+                                    <span class="quick-btn-title">IA & Technologie</span>
+                                    <span class="quick-btn-desc">Découvrir l'IA</span>
+                                </div>
                             </button>
-                            <button class="quick-btn" data-message="Aide-moi à écrire du code Python">
-                                <i class="fas fa-code"></i>
-                                Programmation
+                            <button class="quick-btn gradient-border" data-message="Aide-moi à écrire du code Python">
+                                <div class="quick-btn-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="quick-btn-content">
+                                    <span class="quick-btn-title">Programmation</span>
+                                    <span class="quick-btn-desc">Coder avec l'IA</span>
+                                </div>
                             </button>
-                            <button class="quick-btn" data-message="Donne-moi des conseils créatifs">
-                                <i class="fas fa-lightbulb"></i>
-                                Créativité
+                            <button class="quick-btn gradient-border" data-message="Donne-moi des conseils créatifs">
+                                <div class="quick-btn-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="quick-btn-content">
+                                    <span class="quick-btn-title">Créativité</span>
+                                    <span class="quick-btn-desc">Idées innovantes</span>
+                                </div>
                             </button>
+                        </div>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Réponses rapides</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Sécurisé</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-language"></i>
+                                <span>Multilingue</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,23 +113,33 @@
         <footer class="chat-footer">
             <div class="input-container">
                 <div class="input-wrapper">
-                    <button class="attachment-btn" title="Joindre un fichier">
+                    <button class="input-action-btn attachment-btn" title="Joindre un fichier" disabled>
                         <i class="fas fa-paperclip"></i>
                     </button>
-                    <textarea 
-                        id="user-input" 
-                        placeholder="Tapez votre message..." 
+                    <textarea
+                        id="user-input"
+                        placeholder="Posez-moi une question..."
                         rows="1"
                         autocomplete="off"
+                        spellcheck="true"
                     ></textarea>
+                    <button class="input-action-btn voice-btn" title="Commande vocale" disabled>
+                        <i class="fas fa-microphone"></i>
+                    </button>
                     <button id="send-btn" class="send-btn" title="Envoyer">
-                        <i class="fas fa-paper-plane"></i>
+                        <div class="send-btn-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
                     </button>
                 </div>
                 <div class="input-footer">
                     <span class="input-hint">
-                        <i class="fas fa-info-circle"></i>
-                        Appuyez sur Entrée pour envoyer, Shift+Entrée pour une nouvelle ligne
+                        <i class="fas fa-keyboard"></i>
+                        <kbd>Entrée</kbd> pour envoyer • <kbd>Shift</kbd>+<kbd>Entrée</kbd> nouvelle ligne
+                    </span>
+                    <span class="input-stats">
+                        <i class="fas fa-server"></i>
+                        Gemini 2.0 Flash
                     </span>
                 </div>
             </div>
@@ -105,6 +155,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="scripts/config.js"></script>
     <script src="scripts/marked.min.js"></script>
     <script src="scripts/highlight.min.js"></script>
     <script src="scripts/script.js"></script>

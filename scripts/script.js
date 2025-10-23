@@ -2,19 +2,20 @@ const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 const clearChatBtn = document.getElementById('clear-chat');
-const settingsBtn = document.getElementById('settings-btn');
+const themeToggleBtn = document.getElementById('theme-toggle');
 const loadingOverlay = document.getElementById('loading-overlay');
 
 
-// Configuration API
-const apiKey = 'AIzaSyBTjg1_GwDj1UpSUN_H41QHe354nig4eGk'; 
-const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey;
+// Configuration API (from config.js)
+const apiKey = CONFIG.apiKey;
+const apiUrl = CONFIG.apiUrl + '?key=' + apiKey;
 
 let conversationHistory = [];
 let isTyping = false;
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
     initializeChat();
     setupEventListeners();
     createParticles();
@@ -32,7 +33,7 @@ function setupEventListeners() {
     // Envoi de message
     sendBtn.addEventListener('click', handleSendMessage);
     userInput.addEventListener('keydown', handleKeyPress);
-    
+
     // Actions rapides
     document.querySelectorAll('.quick-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -41,19 +42,23 @@ function setupEventListeners() {
             handleSendMessage();
         });
     });
-    
+
     // Boutons d'action
-    clearChatBtn.addEventListener('click', clearChat);
-    settingsBtn.addEventListener('click', toggleSettings);
-    
+    if (clearChatBtn) {
+        clearChatBtn.addEventListener('click', clearChat);
+    }
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
     // Auto-resize textarea
     userInput.addEventListener('input', autoResizeTextarea);
-    
+
     // Gestion du focus
     userInput.addEventListener('focus', () => {
         document.querySelector('.input-wrapper').classList.add('focused');
     });
-    
+
     userInput.addEventListener('blur', () => {
         document.querySelector('.input-wrapper').classList.remove('focused');
     });
@@ -421,9 +426,37 @@ function clearChat() {
     }, messages.length * 50 + 300);
 }
 
-function toggleSettings() {
-    // Placeholder pour les paramètres
-    alert('Paramètres - Fonctionnalité à venir !');
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    // Update icon
+    const icon = themeToggleBtn.querySelector('i');
+    if (newTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    }
+}
+
+// Initialize theme on load
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    if (themeToggleBtn) {
+        const icon = themeToggleBtn.querySelector('i');
+        if (savedTheme === 'dark') {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
 }
 
 function scrollToBottom() {
